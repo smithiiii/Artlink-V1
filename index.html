@@ -1,0 +1,1597 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>ART-LINK</title>
+    <meta
+      name="description"
+      content="Discover artists, collaborate, and find opportunities with ART-LINK."
+    />
+    <meta name="theme-color" content="#fbf8fd" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fbf8fd;
+        --sf: #fff;
+        --tx: #2f2a3a;
+        --mu: #706a82;
+        --ac: #c75b85;
+        --ac2: #fde8f0;
+        --ln: #ede6f5;
+        --ok: #4f9a76;
+        --er: #d0566a;
+        --sh: 0 4px 22px rgba(150, 120, 185, 0.16);
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        background: var(--bg);
+        color: var(--tx);
+        font:
+          15px/1.5 "Plus Jakarta Sans",
+          system-ui,
+          sans-serif;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0 0 auto;
+        height: env(safe-area-inset-top, 0px);
+        background: var(--bg);
+        z-index: 10;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        letter-spacing: -0.03em;
+        font-weight: 800;
+      }
+      h2 {
+        font-size: 28px;
+      }
+      h3 {
+        font-size: 18px;
+      }
+      .mu {
+        color: var(--mu);
+        font-size: 13px;
+      }
+      svg.i {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      #app {
+        max-width: 1120px;
+        margin: auto;
+        padding: 0 16px 100px;
+      }
+      header {
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        z-index: 6;
+        background: var(--bg);
+        padding: 12px 0;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .logo {
+        font: 800 20px "Plus Jakarta Sans";
+        letter-spacing: -0.04em;
+      }
+      .logo b {
+        color: var(--ac);
+      }
+      nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--sf);
+        border-top: 1px solid var(--ln);
+        display: flex;
+        justify-content: space-around;
+        padding: 6px 2px calc(6px + env(safe-area-inset-bottom, 0px));
+        z-index: 7;
+      }
+      nav button {
+        background: none;
+        border: 0;
+        color: var(--mu);
+        font: 600 10px "Plus Jakarta Sans";
+        min-width: 50px;
+        min-height: 46px;
+        position: relative;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        gap: 1px;
+      }
+      nav button.on {
+        color: var(--ac);
+      }
+      :focus-visible {
+        outline: 3px solid var(--ac);
+        outline-offset: 3px;
+      }
+      .bd {
+        position: absolute;
+        top: 0;
+        right: 6px;
+        background: var(--ac);
+        color: #fff;
+        border-radius: 9px;
+        font-size: 10px;
+        padding: 0 5px;
+      }
+      @media (min-width: 900px) {
+        #app {
+          padding-left: 112px;
+        }
+        nav {
+          top: 0;
+          bottom: auto;
+          right: auto;
+          width: 92px;
+          flex-direction: column;
+          justify-content: flex-start;
+          gap: 8px;
+          border-top: 0;
+          border-right: 1px solid var(--ln);
+          padding-top: 80px;
+        }
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid var(--ln);
+        border-radius: 14px;
+        background: var(--sf);
+        color: var(--tx);
+        font: inherit;
+        min-height: 44px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin: 12px 0 4px;
+      }
+      .er {
+        color: var(--er);
+        font-size: 12px;
+        min-height: 16px;
+      }
+      .b {
+        background: var(--tx);
+        color: var(--bg);
+        border: 0;
+        border-radius: 14px;
+        padding: 10px 18px;
+        font: 700 14px "Plus Jakarta Sans";
+        min-height: 44px;
+        cursor: pointer;
+        transition:
+          transform 0.12s,
+          opacity 0.2s;
+      }
+      .b:hover {
+        opacity: 0.88;
+      }
+      .b:active {
+        transform: scale(0.97);
+      }
+      .b.a {
+        background: var(--ac);
+        color: #fff;
+      }
+      .b.g {
+        background: var(--ac2);
+        color: var(--ac);
+      }
+      .b.w {
+        width: 100%;
+      }
+      .b:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .chip {
+        font: 600 12px "Plus Jakarta Sans";
+        padding: 4px 11px;
+        border-radius: 99px;
+        background: var(--ac2);
+        color: var(--ac);
+        border: 0;
+        white-space: nowrap;
+      }
+      .chip.on {
+        background: var(--tx);
+        color: var(--bg);
+      }
+      button.chip {
+        min-height: 38px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .sp {
+        justify-content: space-between;
+      }
+      .pad {
+        padding: 16px;
+      }
+      .card {
+        background: var(--sf);
+        border-radius: 22px;
+        box-shadow: var(--sh);
+        border: 1px solid var(--ln);
+        overflow: hidden;
+      }
+      .mas {
+        columns: 2;
+        column-gap: 12px;
+        margin-top: 12px;
+      }
+      @media (min-width: 640px) {
+        .mas {
+          columns: 3;
+        }
+      }
+      @media (min-width: 1000px) {
+        .mas {
+          columns: 4;
+        }
+      }
+      .mas > * {
+        break-inside: avoid;
+        margin-bottom: 12px;
+      }
+      .art {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 10px;
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform 0.3s;
+      }
+      .art:hover {
+        transform: scale(1.02);
+      }
+      .art:after {
+        content: "ART-LINK";
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font: 800 18px "Plus Jakarta Sans";
+        color: #fff;
+        opacity: 0.55;
+        transform: rotate(-14deg);
+        pointer-events: none;
+      }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 6px 0;
+      }
+      .sk {
+        background: linear-gradient(90deg, var(--ln), var(--bg), var(--ln));
+        background-size: 200% 100%;
+        animation: s 1.2s infinite;
+        border-radius: 22px;
+      }
+      @keyframes s {
+        to {
+          background-position: -200% 0;
+        }
+      }
+      .ov {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 15, 10, 0.55);
+        display: grid;
+        place-items: center;
+        z-index: 20;
+        padding: 16px;
+        animation: f 0.2s;
+      }
+      .md {
+        background: var(--sf);
+        border-radius: 26px;
+        max-width: 460px;
+        width: 100%;
+        max-height: 92vh;
+        overflow: auto;
+        animation: z 0.25s;
+      }
+      @media (max-width: 700px) {
+        .ov {
+          align-items: end;
+          padding: 0;
+        }
+        .md {
+          max-width: none;
+          border-radius: 26px 26px 0 0;
+          max-height: 94vh;
+          animation: u 0.28s;
+        }
+      }
+      @keyframes f {
+        from {
+          opacity: 0;
+        }
+      }
+      @keyframes z {
+        from {
+          transform: scale(0.96);
+          opacity: 0;
+        }
+      }
+      @keyframes u {
+        from {
+          transform: translateY(40px);
+          opacity: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      .bar {
+        height: 4px;
+        background: var(--ln);
+      }
+      .bar div {
+        height: 100%;
+        background: var(--ac);
+        width: 0;
+      }
+      .msg {
+        max-width: 78%;
+        padding: 9px 13px;
+        border-radius: 18px;
+        background: var(--ac2);
+        margin: 6px 0;
+      }
+      .msg.me {
+        background: var(--tx);
+        color: var(--bg);
+        margin-left: auto;
+      }
+      .mg {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+      }
+      @media (min-width: 900px) {
+        .mg {
+          grid-template-columns: 320px 1fr;
+        }
+        .mb {
+          display: none;
+        }
+      }
+      @media (max-width: 899px) {
+        .mg.chat .lp {
+          display: none;
+        }
+        .mg:not(.chat) .cp {
+          display: none;
+        }
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 92px;
+        transform: translateX(-50%);
+        background: var(--tx);
+        color: var(--bg);
+        padding: 11px 18px;
+        border-radius: 14px;
+        z-index: 30;
+        max-width: 90vw;
+        font-weight: 600;
+      }
+      .mock {
+        font-size: 11px;
+        background: var(--ac2);
+        color: var(--ac);
+        padding: 6px 12px;
+        border-radius: 10px;
+        margin: 6px 0;
+        font-weight: 600;
+      }
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--ac);
+        flex: none;
+      }
+      .av {
+        border-radius: 50%;
+        background: var(--ac2);
+        color: var(--ac);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        flex: none;
+      }
+      .hero {
+        display: grid;
+        gap: 24px;
+        min-height: 100vh;
+        align-content: center;
+        max-width: 900px;
+        margin: auto;
+      }
+      @media (min-width: 800px) {
+        .hero {
+          grid-template-columns: 1.1fr 1fr;
+        }
+      }
+      .rl {
+        height: calc(100dvh - 215px);
+        min-height: 440px;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+        border-radius: 26px;
+        scrollbar-width: none;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .rl::-webkit-scrollbar {
+        display: none;
+      }
+      .rc {
+        height: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        position: relative;
+        overflow: hidden;
+        background-size: 220% 220%;
+        animation: dr 10s ease infinite;
+      }
+      @keyframes dr {
+        50% {
+          background-position: 100% 100%;
+        }
+      }
+      .rc video,
+      .rc img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .rc .ov2 {
+        position: absolute;
+        inset: auto 0 0;
+        padding: 70px 76px 18px 16px;
+        background: linear-gradient(transparent, rgba(47, 42, 58, 0.6));
+        color: #fff;
+      }
+      .rc .ac {
+        position: absolute;
+        right: 12px;
+        bottom: 24px;
+        display: grid;
+        gap: 16px;
+        justify-items: center;
+        color: #fff;
+      }
+      .ab {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--ac);
+        font: 700 22px "Plus Jakarta Sans";
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: transform 0.12s;
+      }
+      .ab:active {
+        transform: scale(0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="ov"></div>
+    <div id="tt"></div>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        esc = (s) =>
+          String(s).replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms)),
+        hue = (id) =>
+          [...id].reduce((a, c) => a + c.charCodeAt(0) * 37, 0) % 360,
+        inr = (n) => "₹" + n.toLocaleString("en-IN");
+      const IC = {
+        discover:
+          '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+        collab:
+          '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6M16 5a3.5 3.5 0 0 1 0 7M18 14c2 .6 3.5 2.6 3.5 6"/>',
+        spotlight:
+          '<path d="m12 3 2.6 5.6 6 .7-4.4 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.4 9.3l6-.7z"/>',
+        messages: '<path d="M4 5h16v11H9l-5 4z"/>',
+        alerts: '<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>',
+        profile:
+          '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6 8-6s8 2 8 6"/>',
+        lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+      };
+      const ic = (n) =>
+        `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
+      /* ===== MOCK SERVER — everything here is simulated. Private fields (name, phone, venue) never leave this closure
+   except through disclose(). Swap api.* for real REST calls (see README note in chat). ===== */
+      const server = (() => {
+        const F = [
+            ["Classical Dance", "Dance"],
+            ["Bollywood Dance", "Dance"],
+            ["Playback Singing", "Music & Vocal"],
+            ["Guitar & Band", "Music & Vocal"],
+            ["Stand-up Comedy", "Comedy & Anchoring"],
+            ["Wedding Anchor", "Comedy & Anchoring"],
+            ["Bridal Mehndi", "Art & Craft"],
+            ["Rangoli Art", "Art & Craft"],
+          ],
+          C = [
+            ["Warangal", 3],
+            ["Hanamkonda", 8],
+            ["Karimnagar", 60],
+            ["Hyderabad", 140],
+          ],
+          NM = [
+            "Meera Iyer",
+            "Rohan Das",
+            "Sana Khan",
+            "Vikram Rao",
+            "Lata Reddy",
+            "Arjun Nair",
+            "Fatima Begum",
+            "Divya Rao",
+          ],
+          CAP = [
+            "Bharatanatyam for weddings and stages",
+            "High-energy sangeet choreography",
+            "Ghazals and film hits, performed live",
+            "Acoustic and rock sets for corporate nights",
+            "Clean, crowd-friendly stand-up",
+            "A warm, witty emcee for weddings",
+            "Intricate bridal and Arabic mehndi",
+            "Festival rangoli, live or pre-made",
+          ],
+          TG = [
+            "Wedding",
+            "Stage",
+            "Solo",
+            "Group",
+            "Corporate",
+            "Live",
+            "Festival",
+            "Home visit",
+          ];
+        const P = Array.from({ length: 24 }, (_, i) => {
+          const f = F[i % 8],
+            c = C[(i * 3) % 4];
+          return {
+            id: "p" + i,
+            name: NM[i % 8] + " " + String.fromCharCode(65 + i),
+            phone: "+91 98xxx " + (1000 + i),
+            form: f[0],
+            cat: f[1],
+            city: c[0],
+            km: c[1] + (i % 5),
+            fee: (4 + ((i * 7) % 17)) * 1000,
+            rating: 4 + ((i * 3) % 10) / 10,
+            cap: CAP[i % 8],
+            tags: [TG[i % 8], TG[(i + 2) % 8], TG[(i + 5) % 8]],
+          };
+        });
+        const R = [
+          [
+            "r1",
+            "Wedding reception live set",
+            "Singer",
+            "Music & Vocal",
+            "1 singer + 1 guitarist",
+            18000,
+            "12 Dec",
+            "7 PM",
+            "2 hrs",
+            "Warangal",
+            3,
+            "Live music for a family wedding reception.",
+          ],
+          [
+            "r2",
+            "Bridal mehndi for 12",
+            "Mehndi artist",
+            "Art & Craft",
+            "2 artists",
+            9000,
+            "5 Dec",
+            "10 AM",
+            "5 hrs",
+            "Hanamkonda",
+            8,
+            "Bridal and family mehndi at a home function.",
+          ],
+          [
+            "r3",
+            "College fest opener",
+            "Dancer",
+            "Dance",
+            "Troupe of 4",
+            30000,
+            "20 Dec",
+            "6 PM",
+            "30 min",
+            "Hyderabad",
+            140,
+            "High-energy opening act for an annual fest.",
+          ],
+          [
+            "r4",
+            "Corporate year-end night",
+            "Anchor",
+            "Comedy & Anchoring",
+            "1 anchor",
+            14000,
+            "28 Dec",
+            "8 PM",
+            "3 hrs",
+            "Karimnagar",
+            60,
+            "Emcee for a company celebration, Telugu + English.",
+          ],
+        ].map((r) => ({
+          id: r[0],
+          title: r[1],
+          form: r[2],
+          cat: r[3],
+          need: r[4],
+          budget: r[5],
+          date: r[6],
+          time: r[7],
+          dur: r[8],
+          area: r[9],
+          km: r[10],
+          desc: r[11],
+        }));
+        let reels = [],
+          liked = new Set(),
+          fol = new Set(),
+          conns = [],
+          applied = new Set(),
+          mine = [],
+          sent = new Set(),
+          inc = [
+            { id: "q1", pid: "p10" },
+            { id: "q2", pid: "p13" },
+          ],
+          N = [
+            {
+              id: "n1",
+              t: "Someone is interested in you",
+              b: "A Warangal organizer liked your profile.",
+              read: false,
+              ts: "2h ago",
+              go: "messages",
+            },
+            {
+              id: "n2",
+              t: "New requirement nearby",
+              b: "Mehndi artist wanted · Hanamkonda · ₹9,000",
+              read: false,
+              ts: "5h ago",
+              go: "gigs",
+            },
+            {
+              id: "n3",
+              t: "Collaboration request received",
+              b: "A Music & Vocal artist wants to collaborate.",
+              read: false,
+              ts: "1d ago",
+              go: "alerts",
+            },
+          ];
+        const note = (t, b, go) =>
+          N.unshift({
+            id: "n" + Math.random(),
+            t,
+            b,
+            read: false,
+            ts: "just now",
+            go,
+          });
+        /* CENTRAL IDENTITY DISCLOSURE — the only door real identity passes through. */
+        const disclose = (p, st) =>
+          st === "unlocked"
+            ? { name: p.name, revealed: true }
+            : { name: null, revealed: false };
+        const pub = (p) => ({
+          id: p.id,
+          form: p.form,
+          cat: p.cat,
+          city: p.city,
+          km: p.km,
+          fee: p.fee,
+          rating: p.rating,
+          cap: p.cap,
+          tags: p.tags.slice(0, 3),
+          verified: true,
+        });
+        const conv = (c) => {
+          const p = P.find((x) => x.id === c.pid);
+          return {
+            id: c.id,
+            status: c.status,
+            form: p.form,
+            city: p.city,
+            ...disclose(p, c.status),
+            msgs: c.status === "unlocked" ? c.msgs : [],
+          };
+        };
+        const mk = (pid) => {
+          let c = conns.find((x) => x.pid === pid);
+          if (!c) {
+            c = {
+              id: "c" + (conns.length + 1),
+              pid,
+              status: "locked",
+              msgs: [],
+            };
+            conns.push(c);
+            note(
+              "Payment unlock available",
+              "A connection is ready. Unlock to chat.",
+              "messages",
+            );
+          }
+          return c.id;
+        };
+        const q = (p, s) =>
+          !s ||
+          (p.form + p.cap + p.city + (p.tags || []).join())
+            .toLowerCase()
+            .includes(s.toLowerCase());
+        return {
+          async login(e, pw) {
+            await wait(500);
+            if (!/\S+@\S+\.\S+/.test(e) || pw.length < 6)
+              throw Error("Invalid email or password.");
+            return { email: e, name: e.split("@")[0] };
+          },
+          async register(d) {
+            await wait(600);
+            return { pending: d.role === "artist" };
+          },
+          async discover(f) {
+            await wait(f.page ? 350 : 600);
+            const L = P.filter(
+              (p) =>
+                (f.cat === "All" || p.cat === f.cat) &&
+                (f.city === "All" || p.city === f.city) &&
+                p.fee <= f.max &&
+                q(p, f.q),
+            );
+            return {
+              total: L.length,
+              more: L.length > (f.page + 1) * 8,
+              items: L.slice(f.page * 8, f.page * 8 + 8).map((p) => ({
+                ...pub(p),
+                followed: fol.has(p.id),
+              })),
+            };
+          },
+          async reqs(f) {
+            await wait(500);
+            return R.filter(
+              (r) =>
+                (f.cat === "All" || r.cat === f.cat) &&
+                q({ form: r.form, cap: r.title + r.desc, city: r.area }, f.q),
+            ).map((r) => ({ ...r, applied: applied.has(r.id) }));
+          },
+          async apply(id) {
+            await wait(500);
+            applied.add(id);
+            note("Application sent", "Awaiting organizer response.", "gigs");
+          },
+          async connect(pid) {
+            await wait(500);
+            return mk(pid);
+          },
+          async collab() {
+            await wait(400);
+            return {
+              list: P.slice(8, 16).map((p) => ({
+                ...pub(p),
+                sent: sent.has(p.id),
+              })),
+              inc: inc.map((i) => ({
+                id: i.id,
+                ...pub(P.find((p) => p.id === i.pid)),
+              })),
+            };
+          },
+          async collabSend(pid) {
+            await wait(400);
+            sent.add(pid);
+          },
+          async collabResp(id, ok) {
+            await wait(400);
+            const i = inc.find((x) => x.id === id);
+            inc = inc.filter((x) => x.id !== id);
+            if (ok) {
+              mk(i.pid);
+              note(
+                "Collaboration accepted",
+                "Unlock the connection to chat.",
+                "messages",
+              );
+            }
+          },
+          async convs() {
+            await wait(300);
+            return conns.map(conv);
+          },
+          async pay(id) {
+            await wait(1500);
+            if (Math.random() < 0.2)
+              throw Error("Payment failed. You were not charged.");
+            conns.find((c) => c.id === id).status = "unlocked";
+            note(
+              "Connection unlocked",
+              "You can now chat and finalize details.",
+              "messages",
+            );
+          },
+          async send(id, t) {
+            const c = conns.find((x) => x.id === id);
+            if (c.status !== "unlocked") throw Error("Locked");
+            c.msgs.push({
+              t,
+              ts: new Date().toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              }),
+            });
+          },
+          async artist(id) {
+            await wait(200);
+            const p = P.find((x) => x.id === id);
+            return {
+              ...pub(p),
+              followed: fol.has(id),
+              collabSent: sent.has(id),
+              followers:
+                40 + ((+id.slice(1) * 53) % 900) + (fol.has(id) ? 1 : 0),
+            };
+          },
+          async follow(id) {
+            const f = fol.has(id);
+            f ? fol.delete(id) : fol.add(id);
+            return { followed: !f };
+          },
+          async reels() {
+            await wait(400);
+            return [
+              ...reels.map((r) => ({ ...r, liked: liked.has(r.id) })),
+              ...P.slice(0, 12).map((p, i) => ({
+                ...pub(p),
+                pid: p.id,
+                id: "v" + p.id,
+                likes: 12 + ((i * 37) % 190),
+                liked: liked.has("v" + p.id),
+                followed: fol.has(p.id),
+              })),
+            ];
+          },
+          async publish(d) {
+            await wait(600);
+            reels.unshift({
+              id: "u" + Math.random().toString(36).slice(2),
+              form: d.form,
+              cap: d.cap,
+              url: d.url,
+              type: d.type,
+              mine: true,
+              likes: 0,
+            });
+          },
+          async like(id) {
+            const l = liked.has(id);
+            l ? liked.delete(id) : liked.add(id);
+            return { liked: !l };
+          },
+          async notes() {
+            await wait(300);
+            return N.map((n) => ({ ...n }));
+          },
+          async readAll() {
+            N.forEach((n) => (n.read = true));
+          },
+          async readOne(id) {
+            N.find((n) => n.id === id).read = true;
+          },
+          unread: () => N.filter((n) => !n.read).length,
+          async postReq(d) {
+            await wait(700);
+            mine.push({ ...d, id: "m" + (mine.length + 1), apps: [] });
+          },
+          async myReqs() {
+            return mine.map((m) => ({
+              id: m.id,
+              form: m.form,
+              date: m.date,
+              budget: m.budget,
+              apps: m.apps.map(pub),
+            }));
+          },
+          async simApps(id) {
+            mine.find((x) => x.id === id).apps = P.slice(0, 2);
+            note(
+              "Application received",
+              "2 anonymized applicants on your requirement.",
+              "gigs",
+            );
+          },
+        };
+      })();
+      const api = server;
+      /* ===== UI ===== */
+      let S = {
+        user: null,
+        tab: "discover",
+        cat: "All",
+        city: "All",
+        max: 50000,
+        q: "",
+        mode: "artist",
+        chat: null,
+        auth: "login",
+        page: 0,
+        prof: {
+          bio: "Performer and event artist. Add your story here.",
+          city: "Warangal",
+          fee: 10000,
+          avail: "Weekends",
+        },
+        port: [
+          { id: "m1", type: "photo", label: "Stage portrait", h: 200 },
+          { id: "m2", type: "video", label: "Live set", dur: "0:48", h: 150 },
+          { id: "m3", type: "audio", label: "Demo track", dur: "2:10", h: 100 },
+        ],
+      };
+      try {
+        S.user = JSON.parse(localStorage.getItem("al_u") || "null");
+      } catch (e) {}
+      const toast = (t) => {
+        $("#tt").innerHTML = `<div class="toast" role="status">${esc(t)}</div>`;
+        setTimeout(() => ($("#tt").innerHTML = ""), 2600);
+      };
+      let previousFocus = null;
+      const modal = (content) => {
+        const root = $("#ov");
+        if (!content) {
+          root.innerHTML = "";
+          previousFocus?.focus();
+          previousFocus = null;
+          return;
+        }
+
+        if (!root.innerHTML) previousFocus = document.activeElement;
+        root.innerHTML = `<div class="ov" data-act="bg"><div class="md" role="dialog" aria-modal="true" aria-label="ART-LINK dialog" tabindex="-1">${content}</div></div>`;
+        requestAnimationFrame(() => {
+          const firstControl = root.querySelector(
+            "input, select, textarea, button, [tabindex='0']",
+          );
+          (firstControl || root.querySelector('[role="dialog"]'))?.focus();
+        });
+      };
+      let tmr, io;
+      const stop = () => clearInterval(tmr);
+      const bg = (id) =>
+        `linear-gradient(160deg,hsl(${hue(id)} 75% 90%),hsl(${(hue(id) + 40) % 360} 70% 82%) 55%,hsl(${(hue(id) + 80) % 360} 60% 74%))`;
+      const art = (p, h, x = "") =>
+        `<div class="art" style="height:${h}px;background:${bg(p.id)}">${x}</div>`;
+      const sk = (h) => `<div class="sk" style="height:${h}px"></div>`;
+      function authView() {
+        const a = S.auth,
+          pend = a === "pending";
+        $("#app").innerHTML =
+          `<div class="hero"><div><div class="logo" style="font-size:34px">art<b>·</b>link</div><h1 style="font-size:40px;margin:14px 0">Where talent meets the stage.</h1><p class="mu" style="font-size:15px">Discover dancers, singers, comedians and craft artists. Stay private until you connect.</p></div>
+<div class="card pad">${
+            pend
+              ? `<h2>Under review</h2><p class="mu">Artist accounts are verified manually. We'll notify you on approval. If rejected, you can resubmit your portfolio.</p><button class="b w" data-act="auth" data-v="login">Back to login</button>`
+              : `<h3>${a === "reg" ? "Create your account" : "Welcome back"}</h3>${a === "reg" ? `<label for="nm">Full name</label><input id="nm"><label for="rl">Joining as</label><select id="rl"><option value="artist">Artist (manual verification)</option><option value="organizer">Organizer</option></select>` : ""}
+<label for="em">Email</label><input id="em" type="email" autocomplete="email"><label for="pw">Password</label><div class="row" style="flex-wrap:nowrap"><input id="pw" type="password"><button class="b g" data-act="eye" aria-label="Show or hide password">Show</button></div>
+<div class="er" id="ae"></div><button class="b a w" data-act="${a === "reg" ? "reg" : "login"}">${a === "reg" ? "Create account" : "Log in"}</button>
+<p class="mu" style="text-align:center">${a === "reg" ? 'Have an account? <a href="#" data-act="auth" data-v="login">Log in</a>' : 'New here? <a href="#" data-act="auth" data-v="reg">Register</a>'}</p>`
+          }</div></div>`;
+      }
+      const NAV = [
+        ["discover", "Discover"],
+        ["spotlight", "Spotlight"],
+        ["messages", "Messages"],
+        ["alerts", "Alerts"],
+        ["profile", "Profile"],
+      ];
+      async function render() {
+        if (!S.user) return authView();
+        $("#app").innerHTML =
+          `<header><div class="logo">art<b>·</b>link</div><input id="q" placeholder="Search art, city, style" aria-label="Search" value="${esc(S.q)}" style="flex:1;min-width:0"><select id="hc" aria-label="Location" style="width:auto">${["All", "Warangal", "Hanamkonda", "Karimnagar", "Hyderabad"].map((c) => `<option ${S.city === c ? "selected" : ""}>${c}</option>`).join("")}</select></header><main id="main"></main>
+<nav aria-label="Main">${NAV.map((n) => `<button class="${S.tab === n[0] ? "on" : ""}" data-act="tab" data-v="${n[0]}" aria-current="${S.tab === n[0] ? "page" : "false"}" aria-label="${n[1]}" type="button">${ic(n[0])}${n[1]}${n[0] === "alerts" && api.unread() ? `<span class="bd" aria-label="${api.unread()} unread notifications">${api.unread()}</span>` : ""}</button>`).join("")}</nav>`;
+        await { discover, spotlight, messages, alerts, profile }[S.tab]();
+      }
+      const M = () => $("#main"),
+        fail = () =>
+          `<div class="card pad" style="margin-top:14px"><p>Something went wrong.</p><button class="b" data-act="rd">Retry</button></div>`;
+      const cats = [
+          "All",
+          "Dance",
+          "Music & Vocal",
+          "Comedy & Anchoring",
+          "Art & Craft",
+        ],
+        tabs = () =>
+          `<div class="tabs">${cats.map((c) => `<button class="chip ${S.cat === c ? "on" : ""}" data-act="cat" data-v="${esc(c)}">${c}</button>`).join("")}</div>`;
+      async function discover() {
+        M().innerHTML = `<div class="row" style="margin:8px 0">${[
+          ["artists", "Artists"],
+          ["gigs", "Gigs"],
+        ]
+          .map(
+            (v) =>
+              `<button class="chip ${(S.dv || "artists") === v[0] ? "on" : ""}" data-act="dv" data-v="${v[0]}">${v[1]}</button>`,
+          )
+          .join("")}</div><div id="sv"></div>`;
+        await (S.dv === "gigs" ? gigs : artists)();
+      }
+      async function artists() {
+        $("#sv").innerHTML =
+          `<div class="mock">Prototype: mocked data, nothing is saved.</div>${tabs()}<div class="row sp"><span class="mu" id="cnt" aria-live="polite">Loading…</span><select id="fb" aria-label="Budget" style="width:auto">${[5000, 10000, 20000, 50000].map((b) => `<option value="${b}" ${S.max === b ? "selected" : ""}>Up to ${inr(b)}</option>`).join("")}</select></div><div class="mas" id="gr">${[240, 190, 270, 220].map(sk).join("")}</div><div id="sent" style="height:40px"></div>`;
+        $("#fb").onchange = (e) => {
+          S.max = +e.target.value;
+          discover();
+        };
+        S.page = 0;
+        io && io.disconnect();
+        await more(true);
+        io = new IntersectionObserver(
+          (e) => e[0].isIntersecting && S.more && more(),
+        );
+        io.observe($("#sent"));
+      }
+      let busy = false;
+      async function more(first) {
+        if (busy) return;
+        busy = true;
+        try {
+          const r = await api.discover({ ...S, page: S.page });
+          if (first) $("#gr").innerHTML = "";
+          $("#cnt").textContent =
+            `${r.total} artist${r.total === 1 ? "" : "s"}`;
+          S.more = r.more;
+          S.page++;
+          if (first && !r.items.length)
+            $("#gr").outerHTML =
+              `<div class="card pad" style="text-align:center;margin-top:14px"><h3>No artists match</h3><p class="mu">Try a wider budget or another city.</p></div>`;
+          else
+            $("#gr").insertAdjacentHTML(
+              "beforeend",
+              r.items
+                .map(
+                  (p) =>
+                    `<article class="card">${art(p, 190 + (hue(p.id) % 3) * 40, `<span class="chip" style="background:rgba(255,255,255,.92);color:#1c1b1a" data-act="prev" data-id="${p.id}">${esc(p.form)}</span><span class="chip" style="background:rgba(255,255,255,.92);color:#1c1b1a">✓ Verified</span>`).replace('class="art"', 'class="art" data-act="prev" data-id="' + p.id + '"')}<div class="pad"><div class="row sp"><b>${inr(p.fee)}</b><span>★ ${p.rating.toFixed(1)}</span></div><div class="mu">${esc(p.city)} · ${p.km} km</div><p style="margin:6px 0;font-size:13px">${esc(p.cap)}</p><div class="row">${p.tags.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div><div class="row" style="margin-top:12px;flex-wrap:nowrap"><button class="${p.followed ? "b" : "b g"}" style="flex:1" data-act="fol" data-id="${p.id}">${p.followed ? "Following" : "Follow"}</button><button class="b a" style="flex:1" data-act="prev" data-id="${p.id}">View</button></div></div></article>`,
+                )
+                .join(""),
+            );
+        } catch (e) {
+          $("#gr").innerHTML = fail();
+        }
+        busy = false;
+      }
+      function sheet(p) {
+        stop();
+        const own = p.own;
+        modal(
+          `${art(p, 260, `<span class="chip" style="background:rgba(255,255,255,.92);color:#1c1b1a">${esc(p.form)}</span>`).replace('class="art"', 'class="art" id="pv"')}<div class="bar"><div id="pb"></div></div><div class="pad">${own ? `<h3>${esc(p.form)}</h3><p class="mu" id="pm">This is the restricted preview others will see: 4 seconds, low resolution.</p>` : `<div class="row sp"><h3>${esc(p.form)} artist</h3><span>★ ${p.rating.toFixed(1)}</span></div><div class="mu">${esc(p.city)} · ${p.km} km · ${inr(p.fee)}/event · ✓ Verified · ${p.followers} followers</div><p>${esc(p.cap)}</p><div class="row">${p.tags.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div><div class="row" style="margin-top:12px;flex-wrap:nowrap"><button class="${p.followed ? "b" : "b g"}" style="flex:1" data-act="fol" data-id="${p.id}">${p.followed ? "Following" : "Follow"}</button><button class="${p.collabSent ? "b g" : "b a"}" style="flex:1" data-act="csend" data-id="${p.id}" ${p.collabSent ? "disabled" : ""}>${p.collabSent ? "Collab requested" : "Collab"}</button></div><div class="mock" style="margin-top:12px">Name and contact unlock after a ₹100 connection.</div><div id="pm"></div>`}<button class="b g w" style="margin-top:8px" data-act="x">Close</button></div>`,
+        );
+        let t = 0;
+        tmr = setInterval(() => {
+          t += 100;
+          const b = $("#pb");
+          if (!b) return stop();
+          b.style.width = t / 40 + "%";
+          if (t >= 4000) {
+            stop();
+            $("#pv").style.filter = "blur(14px)";
+            $("#pv").innerHTML = ic("lock").replace(
+              'class="i"',
+              'class="i" style="width:44px;height:44px;color:#2f2a3a"',
+            );
+            if (!own)
+              $("#pm").innerHTML =
+                `<button class="b a w" data-act="connect" data-id="${p.id}">Connect to View More</button>`;
+          }
+        }, 100);
+      }
+      async function spotlight() {
+        M().innerHTML = `<div id="sv" style="margin-top:8px"></div>`;
+        await reelsView();
+      }
+      async function reelsView() {
+        $("#sv").innerHTML =
+          `<div class="row sp" style="margin-bottom:10px"><span class="mu">Scroll to explore. Names stay hidden.</span><button class="b a" data-act="pub">+ Publish your work</button></div><div class="rl" id="rl">${sk(500)}</div>`;
+        try {
+          const L = await api.reels();
+          $("#rl").innerHTML = L.map(
+            (r) =>
+              `<section class="rc" style="background-image:${bg(r.id)}">${r.url ? (r.type === "video" ? `<video src="${r.url}" autoplay muted loop playsinline></video>` : `<img alt="" src="${r.url}">`) : ""}<div class="ac"><div style="text-align:center"><button class="ab" data-act="like" data-id="${r.id}" aria-label="Like">${r.liked ? "♥" : "♡"}</button><div style="font-size:12px" id="lk${r.id}">${r.likes}</div></div>${r.mine ? "" : `<button class="ab" data-act="fol" data-id="${r.pid}" aria-label="Follow">${r.followed ? "✓" : "+"}</button><button class="ab" data-act="prev" data-id="${r.pid}" aria-label="View profile">${ic("profile")}</button>`}</div><div class="ov2"><span class="chip" style="background:rgba(255,255,255,.92);color:#2f2a3a">${esc(r.form)}${r.mine ? " · You" : ""}</span><p style="margin:8px 0 2px;font-weight:700">${esc(r.cap)}</p><div style="font-size:12px;opacity:.92">${r.mine ? "Published by you" : esc(r.city) + " · ✓ Verified · Preview only"}</div></div></section>`,
+          ).join("");
+        } catch (e) {
+          $("#sv").innerHTML = fail();
+        }
+      }
+      function pubForm() {
+        modal(
+          `<div class="pad"><h3>Publish your work</h3><p class="mu">Share a short video or photo. Viewers see your art form and city, never your name.</p><label for="pf">Photo or video</label><input id="pf" type="file" accept="video/*,image/*"><label for="pc">Caption</label><input id="pc" maxlength="80" placeholder="Describe your piece"><label for="pa">Art form</label><select id="pa">${["Classical Dance", "Bollywood Dance", "Playback Singing", "Guitar & Band", "Stand-up Comedy", "Wedding Anchor", "Bridal Mehndi", "Rangoli Art"].map((f) => `<option>${f}</option>`).join("")}</select><div class="mock" style="margin-top:12px">Prototype: your reel stays in this browser and is not uploaded.</div><div class="er" id="pe"></div><button class="b a w" data-act="pubgo">Publish</button><button class="b g w" style="margin-top:8px" data-act="x">Cancel</button></div>`,
+        );
+      }
+      async function gigs() {
+        $("#sv").innerHTML =
+          `<h2 style="margin-top:8px">Find your next opportunity</h2><p class="mu">Applying is always free. Organizer identity and exact venue stay hidden until both parties unlock.</p>${tabs()}${S.mode === "organizer" ? `<button class="b a" data-act="post">+ Post a requirement</button><div id="mine"></div>` : ""}<div class="mas" id="gr">${[200, 200, 200].map(sk).join("")}</div>`;
+        if (S.mode === "organizer") myReqs();
+        try {
+          const L = await api.reqs(S);
+          $("#gr").innerHTML = L.length
+            ? L.map(
+                (r) =>
+                  `<article class="card pad"><div class="row sp"><span class="chip">${esc(r.form)}</span><b style="font-size:20px">${inr(r.budget)}</b></div><h3 style="margin:10px 0 4px">${esc(r.title)}</h3><div class="mu">${esc(r.need)} · ${r.dur}</div><div class="row" style="margin:10px 0"><span class="chip on">${r.date} · ${r.time}</span></div><div class="mu">${esc(r.area)} · ${r.km} km away</div><div class="row" style="margin-top:12px"><button class="b g" style="flex:1" data-act="rq" data-id="${r.id}">Details</button><button class="b a" style="flex:1" data-act="apply" data-id="${r.id}" ${r.applied ? "disabled" : ""}>${r.applied ? "Applied – Awaiting" : "Apply free"}</button></div></article>`,
+              ).join("")
+            : `<div class="card pad">No requirements match.</div>`;
+        } catch (e) {
+          $("#gr").innerHTML = fail();
+        }
+      }
+      async function rq(id) {
+        const r = (await api.reqs({ cat: "All", q: "" })).find(
+          (x) => x.id === id,
+        );
+        modal(
+          `<div class="pad"><span class="chip">${esc(r.form)}</span><h2 style="margin:10px 0">${esc(r.title)}</h2><p>${esc(r.desc)}</p><div class="mu">${esc(r.need)} · ${r.dur} · ${r.date}, ${r.time}<br>${esc(r.area)} (${r.km} km) · Exact venue and organizer name shared after unlock</div><h3 style="margin:14px 0">${inr(r.budget)}</h3><button class="b a w" data-act="apply" data-id="${id}" ${r.applied ? "disabled" : ""}>${r.applied ? "Applied – Awaiting Organizer" : "Apply (free)"}</button><button class="b g w" style="margin-top:8px" data-act="x">Close</button></div>`,
+        );
+      }
+      async function myReqs() {
+        const L = await api.myReqs();
+        $("#mine").innerHTML = L.length
+          ? `<h3 style="margin:16px 0 8px">Your requirements</h3>${L.map((r) => `<div class="card pad" style="margin-bottom:8px"><div class="row sp"><b>${esc(r.form)} · ${esc(r.date)}</b><span class="mu">${r.apps.length} applications</span></div>${r.apps.length ? r.apps.map((a) => `<div class="row sp" style="margin-top:8px"><span>Applicant · ${esc(a.form)} · ${a.km} km · ★ ${a.rating.toFixed(1)}</span><button class="b g" data-act="connect" data-id="${a.id}">Select</button></div>`).join("") : `<button class="b g" style="margin-top:8px" data-act="simapps" data-id="${r.id}">Simulate applicants</button>`}</div>`).join("")}`
+          : "";
+      }
+      async function messages() {
+        M().innerHTML = `<h2 style="margin-top:8px">Messages</h2><div class="mg ${S.chat ? "chat" : ""}"><div class="lp" id="lp">${sk(80)}</div><div class="cp card" id="cp"></div></div>`;
+        try {
+          const L = await api.convs();
+          $("#lp").innerHTML = L.length
+            ? L.map(
+                (c) =>
+                  `<div class="card pad row" style="margin-bottom:10px;cursor:pointer;flex-wrap:nowrap;${S.chat === c.id ? "border-color:var(--ac)" : ""}" data-act="open" data-id="${c.id}"><span class="av" style="width:42px;height:42px">${c.revealed ? esc(c.name[0]) : ic("lock")}</span><div style="flex:1"><b>${c.revealed ? esc(c.name) : esc(c.form) + " artist"}</b><div class="mu">${esc(c.city)} · ${c.revealed ? "Connected" : "Locked"}</div></div></div>`,
+              ).join("")
+            : `<div class="card pad"><h3>No conversations yet</h3><p class="mu">Tap Collaborate or accept a request to begin.</p></div>`;
+          const c = L.find((x) => x.id === S.chat);
+          $("#cp").innerHTML = c
+            ? chat(c)
+            : `<div class="pad mu" style="text-align:center;padding:60px 16px">Select a conversation</div>`;
+        } catch (e) {
+          $("#lp").innerHTML = fail();
+        }
+      }
+      const chat = (
+        c,
+      ) => `<div class="pad row" style="border-bottom:1px solid var(--ln);flex-wrap:nowrap"><button class="b g mb" data-act="back" aria-label="Back">←</button><span class="av" style="width:42px;height:42px">${c.revealed ? esc(c.name[0]) : ic("lock")}</span><div><b>${c.revealed ? esc(c.name) : esc(c.form) + " artist"}</b><div class="mu">${esc(c.city)} · ${c.revealed ? "Unlocked" : "Locked"}</div></div></div>
+<div class="pad" style="min-height:260px">${c.revealed ? (c.msgs.length ? c.msgs.map((m) => `<div class="msg me">${esc(m.t)}<div style="font-size:10px;opacity:.7">${m.ts}</div></div>`).join("") : '<p class="mu">Connection unlocked. Say hello and finalize booking details.</p>') : `<div style="text-align:center;padding:30px 8px"><div style="color:var(--ac)">${ic("lock").replace('class="i"', 'class="i" style="width:40px;height:40px"')}</div><h3 style="margin:8px 0">Locked conversation</h3><p class="mu">Pay ₹100 once. Both of you see real names and can chat to negotiate and book.</p><button class="b a" data-act="pay" data-id="${c.id}">Unlock ₹100</button></div>`}</div>${c.revealed ? `<div class="pad row" style="flex-wrap:nowrap;border-top:1px solid var(--ln)"><input id="mi" placeholder="Type a message" aria-label="Message"><button class="b a" data-act="send" data-id="${c.id}">Send</button></div>` : ""}`;
+      function payModal(id, st = "idle", err = "") {
+        modal(
+          `<div class="pad"><h3>Unlock connection</h3><p class="mu">Anonymous artist · one-time connection fee</p><div class="row sp card pad" style="margin:12px 0"><span>Connection fee</span><b>₹100</b></div><div class="mock">Simulated payment: no money moves and no card details are collected.</div>${st === "proc" ? '<p aria-live="polite"><b>Processing…</b></p>' : st === "ok" ? '<p style="color:var(--ok)"><b>Payment confirmed by server.</b></p><button class="b a w" data-act="x">Continue</button>' : `${st === "fail" ? `<div class="er">${esc(err)}</div>` : ""}<div class="row">${["UPI", "Card", "Netbanking"].map((m) => `<button class="b g" style="flex:1" data-act="paygo" data-id="${id}">${m}</button>`).join("")}</div><button class="b w" style="margin-top:10px" data-act="x">Cancel</button>`}</div>`,
+        );
+      }
+      async function alerts() {
+        M().innerHTML = `<div class="row sp" style="margin-top:8px"><h2>Notifications</h2><button class="b g" data-act="readall">Mark all read</button></div><div id="res" style="margin-top:12px">${sk(70)}</div>`;
+        const L = await api.notes(),
+          rq2 = (await api.collab()).inc;
+        $("#res").innerHTML =
+          (rq2.length
+            ? `<h3 style="margin:4px 0 8px">Collab requests</h3>${rq2.map((p) => `<div class="card pad row sp" style="margin-bottom:10px"><span><b>${esc(p.form)}</b> artist · ${esc(p.city)} wants to collaborate</span><span class="row"><button class="b g" data-act="resp" data-id="${p.id}" data-v="0">Reject</button><button class="b a" data-act="resp" data-id="${p.id}" data-v="1">Accept</button></span></div>`).join("")}<h3 style="margin:14px 0 8px">Activity</h3>`
+            : "") +
+          (L.length
+            ? L.map(
+                (n) =>
+                  `<div class="card pad row" style="margin-bottom:10px;cursor:pointer;flex-wrap:nowrap" data-act="ngo" data-id="${n.id}" data-v="${n.go}">${n.read ? '<span style="width:9px"></span>' : '<span class="dot"></span>'}<div style="flex:1"><b>${esc(n.t)}</b><div class="mu">${esc(n.b)}</div></div><span class="mu">${n.ts}</span></div>`,
+              ).join("")
+            : `<div class="card pad">You're all caught up.</div>`);
+      }
+      function profile() {
+        const u = S.user,
+          p = S.prof;
+        M().innerHTML = `<div class="card" style="margin-top:8px"><div style="height:130px;background:${bg("cover")}"></div><div class="pad" style="margin-top:-52px"><div class="av" style="width:84px;height:84px;font-size:32px;border:4px solid var(--sf)">${esc(u.name[0].toUpperCase())}</div>
+<div class="row sp" style="margin-top:8px"><div><h2>${esc(u.name)}</h2><div class="mu">${esc(p.city)} · Artist verification: pending</div></div><div class="row"><button class="b g" data-act="edit">Edit profile</button><button class="b" data-act="post">Post a requirement</button></div></div>
+<p>${esc(p.bio)}</p><div class="row"><span class="chip">${inr(p.fee)}/event</span><span class="chip">${esc(p.avail)}</span><span class="chip">★ — no reviews yet</span><span class="chip">0 events</span></div>
+<label>Active as</label><div class="row"><button class="chip ${S.mode === "artist" ? "on" : ""}" data-act="mode" data-v="artist">Artist</button><button class="chip ${S.mode === "organizer" ? "on" : ""}" data-act="mode" data-v="organizer">Organizer</button></div></div></div>
+<div class="row sp" style="margin:18px 0 0"><h3>Portfolio</h3><label class="b a" style="margin:0;display:grid;place-items:center">Upload media<input id="up" type="file" accept="image/*,video/*,audio/*" hidden></label></div><div class="mu">Uploads stay in this browser only. Nothing is sent to a server.</div>
+<div class="mas">${S.port.map((m) => `<div class="card"><div class="art" data-act="tprev" data-id="${m.id}" style="height:${m.h}px;background:${bg(m.id)}"><span class="chip" style="background:rgba(255,255,255,.92);color:#1c1b1a">${m.type === "video" ? "▶ " : m.type === "audio" ? "♪ " : ""}${m.type}${m.dur ? " · " + m.dur : ""}</span></div><div class="pad row sp"><span class="mu">${esc(m.label)}</span><button class="chip" data-act="del" data-id="${m.id}">Delete</button></div></div>`).join("")}</div><button class="b g w" style="margin-top:16px" data-act="logout">Log out</button>`;
+        $("#up").onchange = (e) => {
+          const f = e.target.files[0];
+          if (!f) return;
+          const t = f.type.split("/")[0];
+          S.port.unshift({
+            id: "m" + Date.now(),
+            type: ["video", "audio"].includes(t) ? t : "photo",
+            label: f.name.slice(0, 24),
+            h: (140 + Math.random() * 80) | 0,
+          });
+          toast("Added locally (not uploaded)");
+          profile();
+        };
+      }
+      const frm = (id, l, v, t = "text") =>
+        `<label for="${id}">${l}</label><input id="${id}" type="${t}" value="${esc(v)}">`;
+      function postForm() {
+        modal(
+          `<div class="pad"><h3>Post a requirement</h3>${frm("f1", "Art form needed", "")}${frm("f2", "Number and type of artists", "")}${frm("f3", "Event date", "", "date")}${frm("f4", "Time", "", "time")}${frm("f9", "Duration", "")}${frm("f5", "Budget (₹)", "", "number")}${frm("f6", "General location", "")}${frm("f7", "Exact venue (hidden until unlock)", "")}<label for="f8">Description</label><textarea id="f8"></textarea><div class="er" id="fe"></div><button class="b a w" data-act="postgo">Submit</button><button class="b g w" style="margin-top:8px" data-act="x">Cancel</button></div>`,
+        );
+      }
+      const A = {
+        dv(d) {
+          S.dv = d.v;
+          discover();
+        },
+        pub: pubForm,
+        async like(d, b) {
+          const r = await api.like(b.dataset.id),
+            c = $("#lk" + b.dataset.id);
+          b.textContent = r.liked ? "♥" : "♡";
+          c.textContent = +c.textContent + (r.liked ? 1 : -1);
+        },
+        async pubgo(d, b) {
+          const f = $("#pf").files[0],
+            c = $("#pc").value.trim();
+          if (!f) return ($("#pe").textContent = "Choose a photo or video.");
+          if (f.size > 50e6)
+            return ($("#pe").textContent = "File must be under 50 MB.");
+          if (c.length < 3)
+            return ($("#pe").textContent = "Add a short caption.");
+          b.disabled = true;
+          b.textContent = "Publishing…";
+          await api.publish({
+            form: $("#pa").value,
+            cap: c,
+            url: URL.createObjectURL(f),
+            type: f.type.startsWith("video") ? "video" : "image",
+          });
+          A.x();
+          toast("Published (local preview only)");
+          reelsView();
+        },
+        x() {
+          stop();
+          modal("");
+        },
+        bg(d, b, e) {
+          if (e.target === b) A.x();
+        },
+        rd: () => render(),
+        auth(d) {
+          S.auth = d.v;
+          authView();
+        },
+        eye(d, b) {
+          const p = $("#pw");
+          p.type = p.type === "password" ? "text" : "password";
+          b.textContent = p.type === "password" ? "Show" : "Hide";
+        },
+        async login(d, b) {
+          const e = $("#em").value,
+            p = $("#pw").value;
+          $("#ae").textContent = "";
+          if (!e || !p)
+            return ($("#ae").textContent = "Enter email and password.");
+          b.disabled = true;
+          b.textContent = "Signing in…";
+          try {
+            S.user = await api.login(e, p);
+            localStorage.setItem("al_u", JSON.stringify(S.user));
+          } catch (x) {
+            b.disabled = false;
+            b.textContent = "Log in";
+            return ($("#ae").textContent = x.message);
+          }
+          render();
+        },
+        async reg() {
+          const e = $("#em").value;
+          if (
+            !$("#nm").value ||
+            !/\S+@\S+\.\S+/.test(e) ||
+            $("#pw").value.length < 6
+          )
+            return ($("#ae").textContent =
+              "Name, valid email and 6+ character password required.");
+          const r = await api.register({ role: $("#rl").value });
+          S.auth = r.pending ? "pending" : "login";
+          if (!r.pending) toast("Registered. Please log in.");
+          authView();
+        },
+        logout() {
+          S.user = null;
+          S.chat = null;
+          S.auth = "login";
+          try {
+            localStorage.removeItem("al_u");
+          } catch (e) {}
+          render();
+        },
+        tab(d) {
+          S.tab = d.v;
+          S.chat = null;
+          render();
+        },
+        cat(d) {
+          S.cat = d.v;
+          render();
+        },
+        async prev(d, b) {
+          const p = await api.artist(b.dataset.id);
+          p && sheet(p);
+        },
+        async fol(d, b) {
+          const r = await api.follow(b.dataset.id),
+            ab = b.classList.contains("ab");
+          b.textContent = ab
+            ? r.followed
+              ? "✓"
+              : "+"
+            : r.followed
+              ? "Following"
+              : "Follow";
+          if (!ab) b.className = r.followed ? "b" : "b g";
+        },
+        tprev(d, b) {
+          const m = S.port.find((x) => x.id === b.dataset.id);
+          sheet({ id: m.id, form: m.label, own: true });
+        },
+        async connect(d, b) {
+          A.x();
+          await api.connect(b.dataset.id);
+          toast("Connection ready. Unlock it in Messages.");
+          S.tab = "messages";
+          S.chat = null;
+          render();
+        },
+        async apply(d, b) {
+          b.disabled = true;
+          b.textContent = "Sending…";
+          await api.apply(b.dataset.id);
+          toast("Application submitted (simulated)");
+          A.x();
+          discover();
+        },
+        rq: (d, b) => rq(b.dataset.id),
+        async csend(d, b) {
+          b.disabled = true;
+          await api.collabSend(b.dataset.id);
+          toast("Collab request sent (simulated)");
+          b.textContent = "Collab requested";
+          b.className = "b g";
+        },
+        async resp(d, b) {
+          await api.collabResp(b.dataset.id, b.dataset.v === "1");
+          toast(
+            b.dataset.v === "1"
+              ? "Accepted. Unlock to chat."
+              : "Request declined",
+          );
+          alerts();
+        },
+        open(d, b) {
+          S.chat = b.dataset.id;
+          messages();
+        },
+        back() {
+          S.chat = null;
+          messages();
+        },
+        pay: (d, b) => payModal(b.dataset.id),
+        async paygo(d, b) {
+          const id = b.dataset.id;
+          payModal(id, "proc");
+          try {
+            await api.pay(id);
+            payModal(id, "ok");
+            messages();
+          } catch (x) {
+            payModal(id, "fail", x.message);
+          }
+        },
+        async send(d, b) {
+          const i = $("#mi");
+          if (!i.value.trim()) return;
+          try {
+            await api.send(b.dataset.id, i.value.trim());
+            messages();
+          } catch (e) {
+            toast("Conversation is locked");
+          }
+        },
+        async readall() {
+          await api.readAll();
+          render();
+        },
+        async ngo(d, b) {
+          await api.readOne(b.dataset.id);
+          b.dataset.v === "gigs"
+            ? ((S.tab = "discover"), (S.dv = "gigs"))
+            : (S.tab = b.dataset.v);
+          render();
+        },
+        mode(d) {
+          S.mode = d.v;
+          profile();
+        },
+        post: postForm,
+        async simapps(d, b) {
+          await api.simApps(b.dataset.id);
+          myReqs();
+        },
+        del(d, b) {
+          modal(
+            `<div class="pad"><h3>Delete this media?</h3><p class="mu">This can't be undone.</p><button class="b a w" data-act="del2" data-id="${b.dataset.id}">Delete</button><button class="b g w" style="margin-top:8px" data-act="x">Cancel</button></div>`,
+          );
+        },
+        del2(d, b) {
+          S.port = S.port.filter((m) => m.id !== b.dataset.id);
+          A.x();
+          profile();
+        },
+        edit() {
+          const p = S.prof;
+          modal(
+            `<div class="pad"><h3>Edit profile</h3><label for="e1">Bio</label><textarea id="e1">${esc(p.bio)}</textarea>${frm("e2", "City", p.city)}${frm("e3", "Charges per event (₹)", p.fee, "number")}${frm("e4", "Availability", p.avail)}<div class="er" id="ee"></div><button class="b a w" data-act="save">Save</button><button class="b g w" style="margin-top:8px" data-act="x">Cancel</button></div>`,
+          );
+        },
+        save() {
+          const f = +$("#e3").value;
+          if (!$("#e2").value.trim() || !(f > 0))
+            return ($("#ee").textContent =
+              "City and a valid charge are required.");
+          S.prof = {
+            bio: $("#e1").value,
+            city: $("#e2").value,
+            fee: f,
+            avail: $("#e4").value,
+          };
+          A.x();
+          toast("Profile updated (local only)");
+          profile();
+        },
+        async postgo(d, b) {
+          const g = (n) => $("#f" + n).value.trim(),
+            x = {
+              form: g(1),
+              need: g(2),
+              date: g(3),
+              time: g(4),
+              dur: g(9),
+              budget: +g(5),
+              area: g(6),
+              venue: g(7),
+              desc: g(8),
+            };
+          if (
+            !x.form ||
+            !x.need ||
+            !x.date ||
+            !x.time ||
+            !x.dur ||
+            !(x.budget > 0) ||
+            !x.area ||
+            !x.desc
+          )
+            return ($("#fe").textContent =
+              "Fill every field except venue, with a valid budget.");
+          b.disabled = true;
+          b.textContent = "Submitting…";
+          await api.postReq(x);
+          A.x();
+          S.mode = "organizer";
+          S.tab = "discover";
+          S.dv = "gigs";
+          toast("Requirement saved (simulated)");
+          render();
+        },
+      };
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && $("#ov [role='dialog']")) A.x();
+      });
+      document.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-act]");
+        if (!b) return;
+        if (b.tagName === "A") e.preventDefault();
+        const f = A[b.dataset.act];
+        f && f(b.dataset, b, e);
+      });
+      let dt;
+      document.addEventListener("input", (e) => {
+        if (e.target.id !== "q") return;
+        clearTimeout(dt);
+        dt = setTimeout(() => {
+          S.q = e.target.value;
+          (({ discover, spotlight })[S.tab] || (() => {}))();
+        }, 350);
+      });
+      document.addEventListener("change", (e) => {
+        if (e.target.id === "hc") {
+          S.city = e.target.value;
+          (({ discover, spotlight })[S.tab] || (() => {}))();
+        }
+      });
+      render();
+    </script>
+  </body>
+</html>
